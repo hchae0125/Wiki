@@ -1,0 +1,10 @@
+:root {
+    --shadow-1: rgba(0, 0, 0, 0.1);
+    --shadow-2: rgba(0, 0, 0, 0.2);
+    --shadow-5: rgba(0, 0, 0, 0.5);
+}
+
+.page-view-container {
+    max-width: 1200px;
+    background-color: #fff;
+}
