@@ -2,6 +2,6 @@ import { createConnection, Connection, useContainer, getConnection } from 'typeo
 
 export class dbConnect {
     public static connect(): void {
-        
+        console.log(__dirname);
     }
 }
