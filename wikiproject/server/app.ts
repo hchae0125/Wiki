@@ -1,9 +1,10 @@
-import express, { request, response, Router } from 'express';
+import express, { Request, Response, Router } from 'express';
 import bodyParser from 'body-parser';
 import { dbConnect } from './dbConnect';
+import { appRouting } from './routes/appRouting';
 
 export class Server {
-    public app: Express.Application;
+    public app;
 
     public static bootstrap(): Server {
         return new Server();
@@ -12,6 +13,10 @@ export class Server {
     constructor() {
         dbConnect.connect();
         this.app = express();
-        
+        this.routes();
+    }
+
+    public routes() {
+        this.app.use('/api', appRouting());
     }
 }

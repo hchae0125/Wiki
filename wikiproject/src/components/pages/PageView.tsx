@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
 import * as React from 'react';
 import { IPage } from '../../models/IPage';
+import PageService from '../../services/PageService';
 
 interface IPageView {
     slug: string;
@@ -10,6 +11,13 @@ interface IPageView {
 }
 type IProps = IPageView;
 const PageView: React.FC<IProps> = (props) => {
+    
+    React.useEffect(() => {
+        PageService.getPageAll().then(res => {
+            console.log('page results', res);
+        })
+    });
+
     const [allPages, setAllPages] = React.useState<string[]>([]);
 
     return (<>
