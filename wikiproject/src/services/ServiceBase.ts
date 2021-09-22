@@ -22,7 +22,7 @@ export abstract class ServiceBase {
             if (data) return `${url}?${json}`;
             return url;
         };
-
+        console.log(processQuery(opts.url, opts.data));
         var axiosRequestConfig: AxiosRequestConfig;
         try {
             switch (opts.method) {

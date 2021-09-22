@@ -6,7 +6,7 @@ export default class PageService extends ServiceBase {
 
     public static async getPageAll(): Promise<IPage[]> {
         var result = await this.requestJson<IPage[]>({
-            url: Globals.hostName + 'api/pages/',
+            url: Globals.hostName + '/api/pages/',
             method: "GET"
         });
         try {
