@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import * as React from 'react';
 import { IPage } from '../../models/IPage';
 import PageService from '../../services/PageService';
@@ -11,14 +11,18 @@ interface IPageView {
 }
 type IProps = IPageView;
 const PageView: React.FC<IProps> = (props) => {
-    
+    const [allPages, setAllPages] = React.useState<IPage[]>([]);
+
     React.useEffect(() => {
         PageService.getPageAll().then(res => {
             console.log('page results', res);
-        })
-    });
+            setAllPages([...res]);
+        });
+    },[]);
 
-    const [allPages, setAllPages] = React.useState<string[]>([]);
+    const handleEditPage = (e: React.MouseEvent) => {
+        if(props.onEdit) props.onEdit();
+    }
 
     return (<>
         <>
@@ -29,7 +33,15 @@ const PageView: React.FC<IProps> = (props) => {
                     <Grid sm={8} item>
                         <h1>{props.currentPage && props.currentPage.name || props.slug}</h1>
                     </Grid>
+                    <Grid sm={4} item className="align-right">
+                        <Button onClick={handleEditPage}>Edit Page</Button>
+                        
+                    </Grid>
                 </Grid>
+                <div className="page-view-content">
+                    {props.currentPage && <>{props.currentPage.content}</>}
+
+                </div>
             </div>
 
         </div>

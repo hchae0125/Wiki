@@ -16,6 +16,33 @@ export default class PageService extends ServiceBase {
         }
         return null;
     }
+
+    public static async getPage (id: number): Promise<IPage> {
+        var result = await this.requestJson<IPage>({
+            url: Globals.hostName + '/api/pages/' + id,
+            method: "GET"
+        });
+        try {
+            if (result) return result;
+        } catch (e) {
+            console.log(e);
+        }
+        return null;
+    }
+
+    public static async createPage(model: IPage) {
+        var result = await this.requestJson<IPage>({
+            url: Globals.hostName + '/api/pages',
+            data: model,
+            method: "POST"
+        });
+        try {
+            if (result) return result;
+        } catch (e) {
+            console.log(e);
+        }
+        return null;
+    }
     
     public static async searchPage (keyword: string):Promise<IPage[]> {
         // var result = await this.requestJson<IPage[]>({

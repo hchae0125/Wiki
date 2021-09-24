@@ -3,23 +3,22 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()
 export class Page {
     @PrimaryGeneratedColumn()
-    id: number;
+    id: number | undefined;
 
-    @Column()
+    @Column({type: 'text', unique: true, nullable: false})
     name: string;
 
-    @Column()
-    urlFriendlyName: string;
+    @Column({type: 'text', unique: true, nullable: false})
+    urlFriendlyName: string | undefined;
     
-    @Column()
-    content: string;
+    @Column({type: 'text', nullable: false})
+    content: string | undefined;
     
-    @Column()
-    createdAt: string;
+    @Column({type: 'text', nullable: false})
+    createdAt: string | undefined;
     
-    @Column()
-    lastModifiedAt: string;
+    @Column({type: 'text', nullable: false})
+    lastModifiedAt: string | undefined;
     
-    @Column()
-    parsedContent: string;
+    parsedContent: string | undefined;
 }
