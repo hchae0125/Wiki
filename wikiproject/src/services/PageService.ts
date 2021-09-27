@@ -30,6 +30,19 @@ export default class PageService extends ServiceBase {
         return null;
     }
 
+    public static async getPageBySlug(slug: string): Promise<IPage> {
+        var result = await this.requestJson<IPage>({
+            url: Globals.hostName + "/api/pages/slug/" + slug.toLowerCase(),
+            method: "GET"
+        });
+        try {
+            if (result) return result;
+        } catch (e) {
+            console.log(e);
+        }
+        return null;
+    }
+
     public static async createPage(model: IPage) {
         var result = await this.requestJson<IPage>({
             url: Globals.hostName + '/api/pages',
@@ -45,19 +58,14 @@ export default class PageService extends ServiceBase {
     }
     
     public static async searchPage (keyword: string):Promise<IPage[]> {
-        // var result = await this.requestJson<IPage[]>({
-        //     url: Globals.hostName + `api/pages/search/${keyword.toLowerCase()}`,
-        //     method: "GET"
-        // });
-        var tempResult: IPage[] = [{name: keyword, content: "test content", lastModifiedAt: Date.toString()}];
-
-        // try {
-        //     if (result) return result;
-        //     return tempResult;
-        // } catch (e) {
-        //     tempResult[0].content = e;
-        //     return tempResult;
-        // }
-        return tempResult;
+        var result = await this.requestJson<IPage[]>({
+            url: Globals.hostName + `/api/pages/search/${keyword.toLowerCase()}`,
+            method: "GET"
+        });
+        try {
+            if (result) return result;
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

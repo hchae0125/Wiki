@@ -30,6 +30,7 @@
       "clean-webpack-plugin": "^4.0.0",
       "concurrently": "^6.2.1",
       "express": "^4.17.1",
+      "markdown-it": "^12.2.0",
       "mysql": "^2.14.1",
       "nodemon": "^2.0.12",
       "react": "^17.0.2",

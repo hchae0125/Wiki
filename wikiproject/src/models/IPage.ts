@@ -4,7 +4,7 @@ export interface IPage {
     urlFridnelyName?: string;
     content: string;
     createdAt?: string;
-    lastModifiedAt: string;
+    lastModifiedAt?: string;
     parsedContent?: string;
     desc?: string;
 }

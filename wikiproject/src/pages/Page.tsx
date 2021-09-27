@@ -28,7 +28,15 @@ const Page: React.FC<IProps> = (props) => {
             if (params.mode) setCurrentState({...currentState, mode: params.mode});
             if (params.slug) {
                 const slug = params.slug;
-                
+                PageService.getPageBySlug(slug).then((result) => {
+                    console.log(result);
+                    if (result) {
+                        setCurrentState({...currentState, slug: slug, currentPage: result, isLoading: false});
+                    } else {
+                        const currentPage = {name: slug.replace(/-/g,' '), urlFriendlyName: slug, content: ''};
+                        setCurrentState({...currentState, mode: "view", currentPage: currentPage, isLoading: false, isNew: true});
+                    }
+                }).catch((error) => console.log(error));
             }
         } else {
             PageService.getPage(1).then((result) => {
@@ -38,7 +46,7 @@ const Page: React.FC<IProps> = (props) => {
     }
 
     const handleEdit = () => {
-        let currentPage = props.currentState.currentPage;
+        let currentPage = currentState.currentPage;
         console.log(currentPage);
     }
 
@@ -50,8 +58,7 @@ const Page: React.FC<IProps> = (props) => {
         } else {
             return (
                 <PageView slug={currentState.slug} isNew={currentState.isNew} currentPage={currentState.currentPage}
-                    onEdit={handleEdit}
-                />
+                    onEdit={handleEdit}/>
             )
         }
     }

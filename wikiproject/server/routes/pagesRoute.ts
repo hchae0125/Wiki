@@ -11,5 +11,11 @@ export class PageRouter extends BaseRouter {
         this.router.get('/pages/:id', (req: Request, res: Response, next: NextFunction) => {
             controller.getPage(req, res, next);
         });
+        this.router.get('/pages/slug/:slug', (req: Request, res: Response, next: NextFunction) => {
+            controller.getPageBySlug(req, res, next);
+        });
+        this.router.get('/pages/search/:keyword', (req: Request, res: Response, next: NextFunction) => {
+            controller.searchPages(req, res, next);
+        });
     }
 }

@@ -15,7 +15,6 @@ const PageView: React.FC<IProps> = (props) => {
 
     React.useEffect(() => {
         PageService.getPageAll().then(res => {
-            console.log('page results', res);
             setAllPages([...res]);
         });
     },[]);
@@ -27,7 +26,6 @@ const PageView: React.FC<IProps> = (props) => {
     return (<>
         <>
         <div className="page-view-container">
-            <div>Page View Component</div>
             <div>
                 <Grid container>
                     <Grid sm={8} item>
@@ -40,7 +38,11 @@ const PageView: React.FC<IProps> = (props) => {
                 </Grid>
                 <div className="page-view-content">
                     {props.currentPage && <>{props.currentPage.content}</>}
-
+                    {props.isNew && (
+                        <div className="page-view-notfound">
+                            This page does not exist.
+                        </div>
+                    )}
                 </div>
             </div>
 
